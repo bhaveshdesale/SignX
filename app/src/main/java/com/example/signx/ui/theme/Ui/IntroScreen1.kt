@@ -47,7 +47,7 @@ fun ASLWelcomeScreen() {
                 color = Color.Black
             )
             Text(
-                text = "to ASL Translator!",
+                text = "to Sign Langauge Translator!",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black
@@ -55,9 +55,9 @@ fun ASLWelcomeScreen() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Image Placeholder
+
             Image(
-                painter = painterResource(id = R.drawable.img), // Replace with your image resource
+                painter = painterResource(id = R.drawable.img),
                 contentDescription = "ASL Illustration",
                 modifier = Modifier.size(150.dp)
             )
@@ -88,7 +88,7 @@ fun ASLWelcomeScreen() {
 
             Box(modifier=Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.BottomEnd) {
-                // Get Started Button
+
                 Button(
                     onClick = { /* Navigate to next screen */ },
                     modifier = Modifier
