@@ -31,6 +31,7 @@ fun ASLWelcomeScreen() {
                 )
             )
             .padding(16.dp)
+
     ) {
         Column(
             modifier = Modifier
@@ -88,7 +89,7 @@ fun ASLWelcomeScreen() {
 
             Box(modifier=Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.BottomEnd) {
-
+Spacer(modifier=Modifier.padding(top=100.dp));
                 Button(
                     onClick = { /* Navigate to next screen */ },
                     modifier = Modifier

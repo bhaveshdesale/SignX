@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserProfileScreen(onCancel: () -> Unit, onSave: () -> Unit) {
-    var name by remember { mutableStateOf("Alex Marshall") }
-    var username by remember { mutableStateOf("alex_marshall") }
-    var phoneNumber by remember { mutableStateOf("3313323554") }
-    var email by remember { mutableStateOf("alex@gmail.com") }
+    var name by remember { mutableStateOf("Bhavesh Desale")}
+    var username by remember { mutableStateOf("bhaveshdesale1") }
+    var phoneNumber by remember { mutableStateOf("7507272464") }
+    var email by remember { mutableStateOf("bhaveshdesale16@gmail.com") }
 
     Scaffold(
         topBar = {
