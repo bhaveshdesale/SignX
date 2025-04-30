@@ -239,7 +239,7 @@
 //            .background(Color.Black)
 //            .padding(vertical = 8.dp),
 //        horizontalArrangement = Arrangement.SpaceAround
-//    ) {
+//    )0 {
 //        BottomNavItem(
 //            icon = Icons.Default.Home,
 //            isSelected = currentScreen == Screen.Home,
