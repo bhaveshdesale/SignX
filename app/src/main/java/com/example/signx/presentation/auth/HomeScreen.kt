@@ -1,7 +1,10 @@
 package com.example.signx.presentation.auth
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -11,16 +14,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.signx.presentation.camera.CameraScreen // 👈 Import CameraScreen here
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
-    // For keeping track of selected nav item
     var selectedItem by remember { mutableStateOf(0) }
 
     val navItems = listOf(
@@ -74,19 +73,62 @@ fun HomeScreen() {
             }
         }
     ) { innerPadding ->
-        // Main content
+
+        // 🔥 Main screen content
         Box(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
+                .fillMaxSize()
         ) {
-            Text(
-                text = "Selected: ${navItems[selectedItem].label}",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
+            when (selectedItem) {
+                0 -> HomeContent()         // Home Screen content
+                1 -> CameraScreen()        // 👈 Call CameraScreen() here
+                2 -> VoiceContent()        // Placeholder
+                3 -> AccountContent()      // Placeholder
+            }
         }
+    }
+}
+
+@Composable
+fun HomeContent() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Welcome to Home!",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+@Composable
+fun VoiceContent() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Voice Feature Coming Soon!",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
+    }
+}
+
+@Composable
+fun AccountContent() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Account Details Here!",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
     }
 }
 

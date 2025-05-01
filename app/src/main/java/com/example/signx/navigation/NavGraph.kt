@@ -9,6 +9,7 @@ import com.example.signx.presentation.auth.AuthViewModel
 import com.example.signx.presentation.auth.LoginScreenWithViewModel
 import com.example.signx.presentation.auth.RegisterScreenWithViewModel
 import com.example.signx.presentation.auth.HomeScreen  // ✅ Import correct HomeScreen!
+import com.example.signx.presentation.camera.CameraScreen
 
 @Composable
 fun SignTranslatorApp(
@@ -50,6 +51,10 @@ fun SignTranslatorApp(
         // Home Screen
         composable("home") {
             HomeScreen()
+        }
+        //camera
+        composable("camera") {
+            CameraScreen()
         }
     }
 }

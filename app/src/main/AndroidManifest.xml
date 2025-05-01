@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permission to access the camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+<!--    internet permission-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Declare the camera feature -->
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
 
     <application
         android:allowBackup="true"
