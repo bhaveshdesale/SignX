@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -85,11 +86,12 @@ dependencies {
 
 // CameraX View (PreviewView)
     implementation ("androidx.camera:camera-view:1.3.2")
-
+    implementation("androidx.camera:camera-view:1.0.0-alpha09")
 // Compose integration
     implementation ("androidx.camera:camera-view:1.3.2")
     implementation ("com.google.accompanist:accompanist-permissions:0.34.0")
 
-
+//MediaPipe Hands
+    implementation("com.google.mediapipe:tasks-vision:latest.release")
 
 }
