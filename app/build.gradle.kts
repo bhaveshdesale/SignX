@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.play.services.fido)
+    implementation(libs.androidx.benchmark.macro)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -94,6 +95,7 @@ dependencies {
     implementation ("androidx.compose.material3:material3:1.2.0")
     implementation ("androidx.activity:activity-compose:1.8.2")
     implementation ("androidx.core:core-ktx:1.12.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
 // For CameraX Compose support (optional, see below)
 

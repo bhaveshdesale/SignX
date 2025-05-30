@@ -4,6 +4,8 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -19,9 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.signx.R
 
+
 @Preview(showBackground=true)
 @Composable
-fun SpeakToSignScreen() {
+fun SpeakToSignScreen(onBackClick: () -> Unit = {}) {
     var showRecorder by remember { mutableStateOf(false) }
 
     Box(
@@ -34,7 +37,7 @@ fun SpeakToSignScreen() {
                 .fillMaxSize()
                 .padding(top = 15.dp)
         ) {
-            // Header
+            // Header with Back Arrow
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -42,11 +45,18 @@ fun SpeakToSignScreen() {
                     .background(Color.White),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                IconButton(onClick = { onBackClick() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color(0xFF121417)
+                    )
+                }
+
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .height(23.dp)
-                        .padding(start = 48.dp),
+                        .padding(start = 8.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -58,16 +68,18 @@ fun SpeakToSignScreen() {
                         lineHeight = 23.sp
                     )
                 }
+
+                // Mic Icon on the right
                 Box(
                     modifier = Modifier
                         .width(48.dp)
                         .height(48.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFF121417)),
+                        .background(Color(0xFF000000)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_mic_24),
+                        painter = painterResource(id = R.drawable.baseline_settings_24),
                         contentDescription = "Mic",
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)

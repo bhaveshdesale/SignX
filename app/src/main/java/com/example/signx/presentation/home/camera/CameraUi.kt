@@ -11,6 +11,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,8 +33,11 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.signx.R
 import java.util.concurrent.Executors
 
+
+@androidx.compose.ui.tooling.preview.Preview(showBackground=true)
 @Composable
 fun SpeechToSignScreen(
+    onBackClick: () -> Unit = {},
     onActionCenter: () -> Unit = {},
     onActionLeft: () -> Unit = {},
     onActionRight: () -> Unit = {},
@@ -45,15 +50,41 @@ fun SpeechToSignScreen(
             .fillMaxSize()
             .background(Color(0xFF121417))
     ) {
+        // Top AppBar with Back Arrow
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = { onBackClick() }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = "Speech to Sign",
+                color = Color(0xFFF0F2F5),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Action Buttons Row
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             IconCircleButton(
-                iconRes = R.drawable.baseline_mic_24,
+                iconRes = R.drawable.baseline_browse_gallery_24,
                 size = 40.dp,
                 iconSize = 20.dp,
                 onClick = onActionLeft
@@ -67,12 +98,15 @@ fun SpeechToSignScreen(
             )
             Spacer(modifier = Modifier.width(24.dp))
             IconCircleButton(
-                iconRes = R.drawable.baseline_mic_24,
+                iconRes = R.drawable.baseline_browse_gallery_24,
                 size = 40.dp,
                 iconSize = 20.dp,
                 onClick = onActionRight
             )
         }
+
+
+
 
         Box(
             modifier = Modifier
@@ -104,7 +138,7 @@ fun SpeechToSignScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_mic_24),
+                        painter = painterResource(id = R.drawable.baseline_pause_circle_filled_24),
                         contentDescription = "Mic",
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)

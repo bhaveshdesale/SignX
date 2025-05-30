@@ -43,88 +43,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomeScreen(
-
-) {
-    // For keeping track of selected nav item
-    var selectedItem by remember { mutableStateOf(0) }
-
-    val navItems = listOf(
-        NavItem("Home", Icons.Default.Home),
-        NavItem("Camera", Icons.Default.Call),
-        NavItem("Voice", Icons.Default.Add),
-        NavItem("Account", Icons.Default.AccountCircle)
-    )
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "SignX",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
-            )
-        },
-        bottomBar = {
-            NavigationBar(
-                containerColor = MaterialTheme.colorScheme.surface,
-                tonalElevation = 4.dp
-            ) {
-                navItems.forEachIndexed { index, item ->
-                    NavigationBarItem(
-                        selected = selectedItem == index,
-                        onClick = { selectedItem = index },
-                        icon = {
-                            Icon(
-                                imageVector = item.icon,
-                                contentDescription = item.label
-                            )
-                        },
-                        label = { Text(item.label) },
-                        alwaysShowLabel = true,
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = MaterialTheme.colorScheme.primary,
-                            unselectedIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                            selectedTextColor = MaterialTheme.colorScheme.primary,
-                            unselectedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        )
-                    )
-                }
-            }
-        }
-    ) { innerPadding ->
-        // Main content
-        Box(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Selected: ${navItems[selectedItem].label}",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
-            )
-        }
-    }
-}
-
-data class NavItem(val label: String, val icon: androidx.compose.ui.graphics.vector.ImageVector)
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -151,7 +69,7 @@ fun HomeScreen1(
                 },
                 navigationIcon = {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_account_circle_24),
+                        painter = painterResource(id = R.drawable.baseline_person_24),
                         contentDescription = "Profile",
                         modifier = Modifier
                             .padding(start = 12.dp)
@@ -160,7 +78,7 @@ fun HomeScreen1(
                 },
                 actions = {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_home_24),
+                        painter = painterResource(id = R.drawable.baseline_settings_24),
                         contentDescription = "Menu",
                         modifier = Modifier
                             .padding(end = 12.dp)
@@ -173,7 +91,7 @@ fun HomeScreen1(
         },
         bottomBar = {
             NavigationBar(
-            containerColor = Color.White,
+            containerColor =   Color(0xFFF0F2F5),
             tonalElevation = 4.dp
         )
             {
@@ -181,7 +99,8 @@ fun HomeScreen1(
                     onHomeClick = onHomeClick,
                     onCameraClick = onCameraClick,
                     onVoiceClick = onVoiceClick,
-                    onLearnClick = onLearnClick
+                    onLearnClick = onLearnClick,
+                    selectedItem = "Home"
                 )
             }
         },
@@ -212,8 +131,8 @@ fun HomeScreen1(
                         modifier = Modifier.weight(1f)
                     )
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_photo_camera_24),
-                        contentDescription = "Camera Icon",
+                        painter = painterResource(id = R.drawable.baseline_arrow_drop_down_24),
+                        contentDescription = "dropdown Icon",
                         modifier = Modifier.size(28.dp)
                     )
                 }
@@ -232,17 +151,17 @@ fun HomeScreen1(
 
                 // Steps
                 HowItWorksStep(
-                    imageRes = R.drawable.baseline_account_circle_24,
+                    imageRes = R.drawable.one,
                     title = "Capture Sign",
                     description = "Capture sign language using your device's camera."
                 )
                 HowItWorksStep(
-                    imageRes = R.drawable.baseline_home_24,
+                    imageRes = R.drawable.two,
                     title = "Convert to Text",
                     description = "The app converts sign language into text in real-time."
                 )
                 HowItWorksStep(
-                    imageRes = R.drawable.baseline_account_circle_24,
+                    imageRes = R.drawable.three,
                     title = "Speech-to-Sign",
                     description = "Translate spoken words into sign language."
                 )
@@ -310,9 +229,9 @@ fun HowItWorksStep(
         }
     }
 }
-
 @Composable
 fun BottomNavigationBar(
+    selectedItem: String,
     onHomeClick: () -> Unit,
     onCameraClick: () -> Unit,
     onVoiceClick: () -> Unit,
@@ -321,15 +240,35 @@ fun BottomNavigationBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
-            .border(BorderStroke(1.dp, Color(0xFFF0F2F5))),
+            .background( Color(0xFFF0F2F5))
+            .border(BorderStroke(0.dp, Color(0xFFF0F2F5))),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        BottomNavItem("Home", R.drawable.baseline_home_24, Color(0xFF637087), onHomeClick)
-        BottomNavItem("Camera", R.drawable.baseline_camera_alt_24, Color(0xFF121417), onCameraClick)
-        BottomNavItem("Voice", R.drawable.baseline_mic_24, Color(0xFF121417), onVoiceClick)
-        BottomNavItem("Learn", R.drawable.baseline_person_24, Color(0xFF637087), onLearnClick)
+        BottomNavItem(
+            label = "Home",
+            iconRes = R.drawable.baseline_home_24,
+            isSelected = selectedItem == "Home",
+            onClick = onHomeClick
+        )
+        BottomNavItem(
+            label = "Camera",
+            iconRes = R.drawable.baseline_camera_alt_24,
+            isSelected = selectedItem == "Camera",
+            onClick = onCameraClick
+        )
+        BottomNavItem(
+            label = "Voice",
+            iconRes = R.drawable.baseline_mic_24,
+            isSelected = selectedItem == "Voice",
+            onClick = onVoiceClick
+        )
+        BottomNavItem(
+            label = "Learn",
+            iconRes = R.drawable.baseline_person_24,
+            isSelected = selectedItem == "Learn",
+            onClick = onLearnClick
+        )
     }
 }
 
@@ -337,9 +276,11 @@ fun BottomNavigationBar(
 fun BottomNavItem(
     label: String,
     iconRes: Int,
-    iconColor: Color,
+    isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val iconColor = if (isSelected) Color(0xFF121417) else Color(0xFF637087)
+
     Column(
         modifier = Modifier
             .padding(vertical = 8.dp)

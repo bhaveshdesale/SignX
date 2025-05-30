@@ -5,10 +5,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.signx.presentation.home.learn.LearnSignsScreen
 import com.example.signx.presentation.auth.AuthViewModel
 import com.example.signx.presentation.auth.LoginScreenWithViewModel
 import com.example.signx.presentation.auth.RegisterScreenWithViewModel
-import com.example.signx.presentation.home.HomeScreen  // ✅ Import correct HomeScreen!
 import com.example.signx.presentation.home.HomeScreen1
 import com.example.signx.presentation.home.camera.SpeechToSignScreen
 import com.example.signx.presentation.home.voice.SpeakToSignScreen
@@ -28,7 +28,7 @@ fun SignTranslatorApp(
                 viewModel = viewModel,
                 onLoginSuccess = {
                     navController.navigate("home") {
-                        popUpTo("login") { inclusive = true }  // ✅ This clears login from backstack
+                        popUpTo("login") { inclusive = true }
                     }
                 },
                 launchGoogleSignIn = launchGoogleSignIn,
@@ -42,7 +42,7 @@ fun SignTranslatorApp(
                 viewModel = viewModel,
                 onRegisterSuccess = {
                     navController.navigate("home") {
-                        popUpTo("register") { inclusive = true }  // ✅ Clear register from backstack
+                        popUpTo("register") { inclusive = true }
                     }
                 },
                 launchGoogleSignIn = launchGoogleSignIn,
@@ -57,12 +57,13 @@ fun SignTranslatorApp(
         composable("home") { HomeScreen1(
             onStartTranslation = {navController.navigate("camera")},
             onCameraClick = { navController.navigate("camera") },
-            onVoiceClick = { navController.navigate("voice") }
+            onVoiceClick = { navController.navigate("voice")},
+            onLearnClick = { navController.navigate("Learn")}
             // ...other lambdas
         ) }
-        composable("camera") { SpeechToSignScreen() }
-        composable("voice"){SpeakToSignScreen()}
-
+        composable("camera") { SpeechToSignScreen(onBackClick = { navController.popBackStack() }) }
+        composable("voice"){SpeakToSignScreen(onBackClick = {navController.popBackStack()})}
+        composable("Learn") { LearnSignsScreen(onBackClick = {navController.popBackStack()}) }
         // Add other screens as needed
 
     }
