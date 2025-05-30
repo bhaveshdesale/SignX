@@ -31,6 +31,11 @@ class AuthViewModel : ViewModel() {
         _uiState.update { it.copy(password = newPassword) }
     }
 
+    // Called when re-enter password text field changes
+    fun onReEnterPasswordChange(newPassword: String) {
+        _uiState.update { it.copy(reEnterPassword = newPassword) }
+    }
+
     // Normal Email/Password Login
     fun login() {
         val email = uiState.value.email
@@ -55,9 +60,17 @@ class AuthViewModel : ViewModel() {
         val name = uiState.value.name
         val email = uiState.value.email
         val password = uiState.value.password
+        val reEnterPassword = uiState.value.reEnterPassword
 
-        if (name.isBlank() || email.isBlank() || password.isBlank()) {
-            _uiState.update { it.copy(authMessage = "Please enter name, email, and password.") }
+        if (reEnterPassword != null) {
+            if (name.isBlank() || email.isBlank() || password.isBlank() || reEnterPassword.isBlank()) {
+                _uiState.update { it.copy(authMessage = "Please enter name, email, and both password fields.") }
+                return
+            }
+        }
+
+        if (password != reEnterPassword) {
+            _uiState.update { it.copy(authMessage = "Passwords do not match.") }
             return
         }
 

@@ -8,8 +8,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.signx.presentation.auth.AuthViewModel
 import com.example.signx.presentation.auth.LoginScreenWithViewModel
 import com.example.signx.presentation.auth.RegisterScreenWithViewModel
-import com.example.signx.presentation.auth.HomeScreen  // ✅ Import correct HomeScreen!
-import com.example.signx.presentation.camera.CameraScreen
+import com.example.signx.presentation.home.HomeScreen  // ✅ Import correct HomeScreen!
+import com.example.signx.presentation.home.HomeScreen1
+import com.example.signx.presentation.home.camera.SpeechToSignScreen
+import com.example.signx.presentation.home.voice.SpeakToSignScreen
 
 @Composable
 fun SignTranslatorApp(
@@ -50,11 +52,20 @@ fun SignTranslatorApp(
 
         // Home Screen
         composable("home") {
-            HomeScreen()
+            HomeScreen1()
         }
-        //camera
-        composable("camera") {
-            CameraScreen()
-        }
+        composable("home") { HomeScreen1(
+            onStartTranslation = {navController.navigate("camera")},
+            onCameraClick = { navController.navigate("camera") },
+            onVoiceClick = { navController.navigate("voice") }
+            // ...other lambdas
+        ) }
+        composable("camera") { SpeechToSignScreen() }
+        composable("voice"){SpeakToSignScreen()}
+
+        // Add other screens as needed
+
     }
+    
 }
+
