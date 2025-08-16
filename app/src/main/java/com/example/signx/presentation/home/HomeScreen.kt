@@ -53,7 +53,9 @@ fun HomeScreen1(
     onHomeClick: () -> Unit = {},
     onCameraClick: () -> Unit ={},
     onVoiceClick: () -> Unit = {},
-    onLearnClick: () -> Unit = {}
+
+    onLearnClick: () -> Unit = {},
+    onProfileClick: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -68,13 +70,15 @@ fun HomeScreen1(
                     )
                 },
                 navigationIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_person_24),
-                        contentDescription = "Profile",
-                        modifier = Modifier
-                            .padding(start = 12.dp)
-                            .size(32.dp)
-                    )
+                    IconButton(onClick = onProfileClick) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_person_24),
+                            contentDescription = "Profile",
+                            modifier = Modifier
+                                .padding(start = 12.dp)
+                                .size(32.dp)
+                        )
+                    }
                 },
                 actions = {
                     Icon(
@@ -269,6 +273,7 @@ fun BottomNavigationBar(
             isSelected = selectedItem == "Learn",
             onClick = onLearnClick
         )
+
     }
 }
 

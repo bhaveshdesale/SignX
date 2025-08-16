@@ -159,7 +159,8 @@ fun SignTranslatorApp(
                 onStartTranslation = { navController.navigate("camera") },
                 onCameraClick = { navController.navigate("camera") },
                 onVoiceClick = { navController.navigate("voice") },
-                onLearnClick = { navController.navigate("Learn") }
+                onLearnClick = { navController.navigate("Learn") },
+
             )
         }
 
