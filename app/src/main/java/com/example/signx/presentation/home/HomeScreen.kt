@@ -55,7 +55,8 @@ fun HomeScreen1(
     onVoiceClick: () -> Unit = {},
 
     onLearnClick: () -> Unit = {},
-    onProfileClick: () -> Unit = {}
+    onProfileClick: () -> Unit = {},
+    onSettingClick:()->Unit={}
 ) {
     Scaffold(
         topBar = {
@@ -81,13 +82,15 @@ fun HomeScreen1(
                     }
                 },
                 actions = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_settings_24),
-                        contentDescription = "Menu",
-                        modifier = Modifier
-                            .padding(end = 12.dp)
-                            .size(32.dp)
-                    )
+                    IconButton(onClick =  onSettingClick) { // Change to use settings click handler
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_settings_24),
+                            contentDescription = "Settings",
+                            modifier = Modifier
+                                .padding(end = 12.dp)
+                                .size(32.dp)
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(Color(0xFFF0F2F5))
 //                elevation = 4.dp

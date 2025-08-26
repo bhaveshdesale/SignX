@@ -74,6 +74,7 @@
 
 package com.example.signx.navigation
 
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -91,6 +92,9 @@ import com.example.signx.presentation.onboardingscreens.OnboardingPager
 import com.example.signx.presentation.onboardingscreens.onboardingPages
 import com.example.signx.presentation.onboardingscreens.LottieSplashScreen
 import androidx.compose.ui.Modifier
+import com.example.signx.presentation.home.profile.CompletedProfileScreen
+import com.example.signx.presentation.home.profile.ProfileScreen1
+import com.example.signx.presentation.home.settings.SettingsScreen
 
 @Composable
 fun SignTranslatorApp(
@@ -160,6 +164,8 @@ fun SignTranslatorApp(
                 onCameraClick = { navController.navigate("camera") },
                 onVoiceClick = { navController.navigate("voice") },
                 onLearnClick = { navController.navigate("Learn") },
+                onProfileClick = { navController.navigate("profile") },
+                onSettingClick = { navController.navigate("settings") }
 
             )
         }
@@ -173,5 +179,38 @@ fun SignTranslatorApp(
         composable("Learn") {
             LearnSignsScreen(onBackClick = { navController.popBackStack() })
         }
+        composable("profile") {
+            CompletedProfileScreen(
+                onBackClick = { navController.popBackStack() },
+                        onEditProfileClick = { navController.navigate("editProfile") }
+            )
+        }
+        composable("editProfile") {
+            ProfileScreen1(
+                onBackClick = { navController.popBackStack() },
+                onSaveChanges = {
+                    // Handle save changes logic here
+                    navController.popBackStack() // Go back to profile screen after saving
+                }
+            )
+        }
+        composable("settings") {
+            SettingsScreen(
+                onBackClick = { navController.popBackStack() },
+                onLanguageClick = { /* Handle language selection */ },
+                onThemeClick = { /* Handle theme selection */ },
+                onNotificationsClick = { /* Handle notifications */ },
+                onPrivacyPolicyClick = { /* Handle privacy policy */ },
+                onHelpSupportClick = { /* Handle help & support */ },
+                onLogoutClick = {
+                    // Handle logout logic
+                    navController.navigate("login") {
+                        popUpTo("home") { inclusive = true }
+                    }
+                }
+            )
+        }
+
+
     }
 }

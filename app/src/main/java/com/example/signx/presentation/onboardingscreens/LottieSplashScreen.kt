@@ -4,10 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
+import com.airbnb.lottie.compose.*
 import com.example.signx.R
 
 @Composable
@@ -15,25 +12,29 @@ fun LottieSplashScreen(
     modifier: Modifier = Modifier,
     onAnimationFinished: () -> Unit
 ) {
+    // Load the Lottie composition
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.splash))
-    val progress by animateLottieCompositionAsState(
-        composition,
-        iterations = 1,
+
+    // Play the animation state
+    val animationState = animateLottieCompositionAsState(
+        composition = composition,
+        iterations = 1,        // play once
         speed = 1.0f,
         restartOnPlay = false,
         isPlaying = true,
     )
 
     // Detect when animation finishes
-    LaunchedEffect(progress) {
-        if (progress == 1f) {
+    LaunchedEffect(animationState.isAtEnd && !animationState.isPlaying) {
+        if (animationState.isAtEnd && !animationState.isPlaying) {
             onAnimationFinished()
         }
     }
 
+    // Show Lottie animation
     LottieAnimation(
-        composition,
-        progress,
+        composition = composition,
+        progress = { animationState.progress },
         modifier = modifier
     )
 }
